@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | G2I Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/auth.js"></script>
+</head>
+<body>
+  <main class="container narrow">
+    <h1>Login</h1>
+    <form id="loginForm" class="form">
+      <label>Email<input name="email" type="email" required></label>
+      <label>Password<input name="password" type="password" required></label>
+      <label>Role
+        <select name="role" required>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="admin">Admin</option>
+        </select>
+      </label>
+      <button type="submit" class="btn">Login</button>
+      <p class="muted">No account? <a href="signup-student.html">Sign up</a></p>
+      <p id="loginMsg" class="muted"></p>
+    </form>
+  </main>
+</body>
+</html>

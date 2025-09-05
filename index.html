@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G2I Learning Solutions</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container">
+      <a href="index.html" class="brand">G2I Learning</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">☰</button>
+      <ul class="nav" id="nav">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="clients.html">For Schools & Clients</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="auth-links"><a href="login.html" class="btn btn--ghost">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero container">
+    <div class="hero__content">
+      <h1>Empowering Learners. Enabling Futures.</h1>
+      <p>Courses, tools and analytics for <b>students</b>, <b>teachers</b> and <b>institutions</b>.</p>
+      <div class="cta">
+        <a class="btn" href="courses.html">Explore Courses</a>
+        <a class="btn btn--ghost" href="clients.html">Solutions for Schools</a>
+      </div>
+    </div>
+    <div class="hero__stats">
+      <div class="stat"><span>120+</span><small>Resources</small></div>
+      <div class="stat"><span>15k</span><small>Learners</small></div>
+      <div class="stat"><span>98%</span><small>Satisfaction</small></div>
+    </div>
+  </section>
+
+  <section class="features container">
+    <h2>Why choose G2I?</h2>
+    <div class="grid grid-3">
+      <article class="card">
+        <h3>Expert-led content</h3>
+        <p>Structured lessons, videos and practice crafted by experienced educators.</p>
+      </article>
+      <article class="card">
+        <h3>Interactive & Assessments</h3>
+        <p>Quizzes and assignments with instant feedback to reinforce learning.</p>
+      </article>
+      <article class="card">
+        <h3>Analytics for Teachers</h3>
+        <p>Track student progress and identify learning gaps with simple dashboards.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="popular container">
+    <div class="section-head">
+      <h2>Popular Courses</h2>
+      <a href="courses.html" class="link">View all →</a>
+    </div>
+    <div id="popular-courses" class="grid grid-3"></div>
+  </section>
+
+  <section class="testimonials container">
+    <h2>Learner stories</h2>
+    <div class="grid grid-3">
+      <blockquote class="card">“The practice sets boosted my scores!” <cite>— Aarav, Class 10</cite></blockquote>
+      <blockquote class="card">“Dashboards made remediation easy.” <cite>— Mrs. Iyer, Teacher</cite></blockquote>
+      <blockquote class="card">“Onboarding was seamless for our school.” <cite>— Principal Rao</cite></blockquote>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>G2I Learning</h4>
+        <p>Open, engaging and measurable learning experiences.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="clients.html">For Clients</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get started</h5>
+        <ul>
+          <li><a href="signup-student.html">Sign up (Student)</a></li>
+          <li><a href="signup-teacher.html">Sign up (Teacher)</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">© 2025 G2I Learning Solutions</p>
+  </footer>
+  <script defer src="js/courses.js"></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!window.ALL_COURSES) return;
+      const popular = window.ALL_COURSES.slice(0,3);
+      const wrap = document.getElementById('popular-courses');
+      if (!wrap) return;
+      wrap.innerHTML = popular.map(c => `
+        <article class="card course">
+          <h3>${c.title}</h3>
+          <p>${c.description}</p>
+          <div class="meta">
+            <span>Duration: ${c.duration}</span>
+            <span>Price: ₹${c.price}</span>
+          </div>
+          <a class="btn btn--small" href="course-details.html?id=${encodeURIComponent(c.id)}">View Details</a>
+        </article>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

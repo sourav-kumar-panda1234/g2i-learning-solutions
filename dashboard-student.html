@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | G2I</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/auth.js"></script>
+  <script defer src="js/courses.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container">
+      <a href="index.html" class="brand">G2I Learning</a>
+      <ul class="nav">
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    <h1>Welcome, <span id="studentName"></span></h1>
+    <h2>Your Enrollments</h2>
+    <div id="myCourses" class="grid grid-3"></div>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = currentUser();
+      if (!user || user.role !== 'student') return location.href = 'login.html';
+      document.getElementById('studentName').textContent = user.name || user.email;
+      const enrollments = JSON.parse(localStorage.getItem('enrollments')||'[]').filter(e => e.userId === user.id);
+      const cards = enrollments.map(e => {
+        const c = window.ALL_COURSES.find(x => x.id === e.courseId);
+        return c ? `<article class="card"><h3>${c.title}</h3><p>${c.description}</p></article>` : '';
+      }).join('');
+      document.getElementById('myCourses').innerHTML = cards || '<p class="muted">No enrollments yet. <a href="courses.html">Browse courses</a>.</p>';
+    });
+  </script>
+</body>
+</html>

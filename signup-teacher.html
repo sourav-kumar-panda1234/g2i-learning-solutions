@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up (Teacher) | G2I</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/auth.js"></script>
+</head>
+<body>
+  <main class="container narrow">
+    <h1>Create Teacher Account</h1>
+    <form id="signupTeacher" class="form">
+      <label>Name<input name="name" required></label>
+      <label>Email<input name="email" type="email" required></label>
+      <label>Password<input name="password" type="password" required></label>
+      <label>Subject<input name="subject" placeholder="e.g., Math"></label>
+      <button class="btn" type="submit">Create account</button>
+      <p class="muted" id="signupTeacherMsg"></p>
+    </form>
+  </main>
+</html>

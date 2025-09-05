@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Details | G2I Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/courses.js"></script>
+  <script defer src="js/auth.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container">
+      <a href="index.html" class="brand">G2I Learning</a>
+      <ul class="nav">
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="login.html" class="btn btn--ghost">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    <div id="details" class="card"></div>
+  </main>
+  <script>
+    function getParam(key){ return new URLSearchParams(location.search).get(key); }
+    document.addEventListener('DOMContentLoaded', () => {
+      const id = getParam('id');
+      const c = window.ALL_COURSES.find(x => x.id === id);
+      const el = document.getElementById('details');
+      if(!c){ el.innerHTML = '<p>Course not found.</p>'; return; }
+      el.innerHTML = `
+        <h1>${c.title}</h1>
+        <p>${c.description}</p>
+        <p><b>Category:</b> ${c.category} | <b>Level:</b> ${c.level} | <b>Duration:</b> ${c.duration}</p>
+        <p><b>Price:</b> ₹${c.price}</p>
+        <div class="actions">
+          <button class="btn" onclick="enroll('${c.id}')">Enroll Now</button>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

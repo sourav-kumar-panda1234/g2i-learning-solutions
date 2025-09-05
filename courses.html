@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses | G2I Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+  <script defer src="js/courses.js"></script>
+  <script defer src="js/auth.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container">
+      <a href="index.html" class="brand">G2I Learning</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">☰</button>
+      <ul class="nav" id="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html" class="active">Courses</a></li>
+        <li><a href="clients.html">For Schools & Clients</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="auth-links"><a href="login.html" class="btn btn--ghost">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="section-head">
+      <h1>Browse Courses</h1>
+      <div class="filters">
+        <input id="q" type="search" placeholder="Search courses..." />
+        <select id="category">
+          <option value="">All Categories</option>
+          <option>JEE</option>
+          <option>NEET</option>
+          <option>Foundation</option>
+          <option>Olympiad</option>
+          <option>Skills</option>
+        </select>
+        <select id="level">
+          <option value="">All Levels</option>
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+        <button id="apply" class="btn btn--small">Apply</button>
+      </div>
+    </div>
+    <div id="course-results" class="grid grid-3"></div>
+  </main>
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const render = () => {
+        const q = document.getElementById('q').value.toLowerCase();
+        const cat = document.getElementById('category').value;
+        const level = document.getElementById('level').value;
+        const results = window.ALL_COURSES.filter(c => {
+          const matchQ = !q || (c.title.toLowerCase().includes(q) || c.description.toLowerCase().includes(q));
+          const matchC = !cat || c.category === cat;
+          const matchL = !level || c.level === level;
+          return matchQ && matchC && matchL;
+        });
+        const wrap = document.getElementById('course-results');
+        wrap.innerHTML = results.map(c => `
+          <article class="card course">
+            <h3>${c.title}</h3>
+            <p>${c.description}</p>
+            <div class="meta">
+              <span>${c.category}</span> • 
+              <span>${c.level}</span> • 
+              <span>${c.duration}</span> • 
+              <span>₹${c.price}</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn--small" href="course-details.html?id=${encodeURIComponent(c.id)}">Details</a>
+              <button class="btn btn--small" onclick="enroll('${c.id}')">Enroll</button>
+            </div>
+          </article>
+        `).join('');
+      };
+      document.getElementById('apply').addEventListener('click', render);
+      document.getElementById('q').addEventListener('input', render);
+      render();
+    });
+  </script>
+</body>
+</html>
